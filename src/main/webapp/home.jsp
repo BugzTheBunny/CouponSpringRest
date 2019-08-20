@@ -7,11 +7,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="addCustomer">
-		<input type="text" name="id"> 
-		<input type="text" name="name">
-		<input type="text" name="password"> 
-		<input type="submit">
-	</form>
+	<div>
+	<p>Add Customer
+		<form action="addCustomer">
+		<br>
+			<p>id
+			<input type="text" name="id"> 
+		<br>	
+			<p>name
+			<input type="text" name="name">
+		<br>
+			<p>id	
+			<input type="text" name="password"> 
+		<br>
+			<input type="submit">
+		</form>
+	</div>
 </body>
 </html>
