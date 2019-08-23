@@ -47,11 +47,13 @@
 			<p>
 				<input type="text" name="start_date">start date<br>
 			<p>
-				<input type="text" name="end_date">start date<br> 
+				<input type="text" name="end_date">start date<br>
 			<p>
-				<input type="text" name="type">type<br> 
-				
-			<input type="submit">
+				<input type="text" name="type">type<br>
+			<p>
+
+				<input type="text" name="status"> status <br> <input
+					type="submit">
 		</form>
 	</div>
 
@@ -59,8 +61,7 @@
 		<p>delete customer
 		<form action="/dcustomer/">
 			<p>
-				<input type="text"> id<br> <input
-					type="submit">
+				<input type="text"> id<br> <input type="submit">
 		</form>
 	</div>
 </body>

@@ -6,10 +6,14 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
+import com.sprj.coupapi.enums.CouponStatus;
 import com.sprj.coupapi.enums.CouponType;
 
+import javafx.beans.DefaultProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +33,9 @@ public class Coupon {
 	private int amount;
 	@Enumerated(EnumType.STRING)
 	private CouponType type;
+	@Enumerated(EnumType.STRING)
+	@Column(columnDefinition = "varchar(32) default 'SALE'")
+	private CouponStatus status = CouponStatus.SALE;
 	// Date start_date;
 	// Date end_date;
 
