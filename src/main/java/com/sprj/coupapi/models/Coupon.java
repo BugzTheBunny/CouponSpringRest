@@ -31,8 +31,10 @@ public class Coupon {
 	private String message;
 	private double price;
 	private int amount;
+
 	@Enumerated(EnumType.STRING)
-	private CouponType type;
+	@Column(columnDefinition = "varchar(32) default 'OTHER'")
+	private CouponType type = CouponType.OTHER;
 	@Enumerated(EnumType.STRING)
 	@Column(columnDefinition = "varchar(32) default 'SALE'")
 	private CouponStatus status = CouponStatus.SALE;

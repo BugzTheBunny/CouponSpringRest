@@ -3,10 +3,14 @@ package com.sprj.coupapi.controllers;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.sprj.coupapi.dao.CompanyRepository;
 import com.sprj.coupapi.dao.CouponRepository;
@@ -15,7 +19,7 @@ import com.sprj.coupapi.models.Company;
 import com.sprj.coupapi.models.Coupon;
 import com.sprj.coupapi.models.Customer;
 
-@Controller
+@RestController
 public class AdminController {
 
 	@Autowired
@@ -27,47 +31,41 @@ public class AdminController {
 
 	@RequestMapping("/")
 	public String home() {
-		return "home.jsp";
+		return "-------------Working! Test with postman for now!-------------";
 	}
 
 	////////////////
 	// GET by id
 	////////////////
-	@RequestMapping("/customer/{id}")
-	@ResponseBody
-	public String getCustomer(@PathVariable("id") long id) {
-		return customerRepository.findById(id).toString();
+	@GetMapping("/customer/{id}")
+	public Customer getCustomer(@PathVariable("id") long id) {
+		return customerRepository.findById(id);
 	}
 
-	@RequestMapping("/company/{id}")
-	@ResponseBody
-	public String getCompany(@PathVariable("id") long id) {
-		return companyRepository.findById(id).toString();
+	@GetMapping("/company/{id}")
+	public Company getCompany(@PathVariable("id") long id) {
+		return companyRepository.findById(id);
 	}
 
-	@RequestMapping("/coupon/{id}")
-	@ResponseBody
-	public String getCoupon(@PathVariable("id") long id) {
-		return couponRepository.findById(id).toString();
+	@GetMapping("/coupon/{id}")
+	public Coupon getCoupon(@PathVariable("id") long id) {
+		return couponRepository.findById(id);
 	}
 
 	/////////////////////////
 	// GET for Collections
 	/////////////////////////
-	@RequestMapping("/customers")
-	@ResponseBody
+	@GetMapping("/customers")
 	public Collection<Customer> getCustomerList() {
 		return customerRepository.findAll();
 	}
 
-	@RequestMapping("/companies")
-	@ResponseBody
+	@GetMapping("/companies")
 	public Collection<Company> getCompanyList() {
 		return companyRepository.findAll();
 	}
 
-	@RequestMapping("/coupons")
-	@ResponseBody
+	@GetMapping("/coupons")
 	public Collection<Coupon> getCouponList() {
 		return couponRepository.findAll();
 	}
@@ -76,14 +74,12 @@ public class AdminController {
 	// GET By Name
 	/////////////
 
-	@RequestMapping("/customer/{name}")
-	@ResponseBody
+	@GetMapping("/cust/{name}")
 	public Customer getCustomer(@PathVariable("name") String name) {
 		return customerRepository.findByName(name);
 	}
 
-	@RequestMapping("/company/{name}")
-	@ResponseBody
+	@GetMapping("/comp/{name}")
 	public Company getCompany(@PathVariable("name") String name) {
 		return companyRepository.findByName(name);
 	}
@@ -92,52 +88,60 @@ public class AdminController {
 	// POST
 	///////
 
-	@RequestMapping("/addCustomer")
-	@ResponseBody
-	public String addCustomer(Customer customer) {
+	@PostMapping(path = "/addCustomer", consumes = { "application/json" })
+	public void addCustomer(@RequestBody Customer customer) {
 		customerRepository.save(customer);
-		return "Customer Added!";
 
 	}
 
-	@RequestMapping("/addCompany")
-	@ResponseBody
-	public String addCompany(Company company) {
+	@PostMapping(path = "/addCompany", consumes = { "application/json" })
+	public void addCompany(@RequestBody Company company) {
 		companyRepository.save(company);
-		return "Company Added!";
 
 	}
 
-	@RequestMapping("/addCoupon")
-	@ResponseBody
-	public String addCoupon(Coupon coupon) {
+	@PostMapping(path = "/addCoupon", consumes = { "application/json" })
+	public void addCoupon(@RequestBody Coupon coupon) {
 		couponRepository.save(coupon);
-		return "Coupon Added!";
 	}
 
 	///////////////
 	// DELETE by ID
 	///////////////
 
-	@RequestMapping("/dcustomer/{id}")
-	@ResponseBody
-	public String removeCustomer(@PathVariable("id") long id) {
+	@DeleteMapping("/dcustomer/{id}")
+	public void removeCustomer(@PathVariable("id") long id) {
 		customerRepository.delete(customerRepository.findById(id));
-		return "Customer #" + id + " Was Removed";
 	}
 
-	@RequestMapping("/dcompany/{id}")
-	@ResponseBody
-	public String removeCompany(@PathVariable("id") long id) {
+	@DeleteMapping("/dcompany/{id}")
+	public void removeCompany(@PathVariable("id") long id) {
 		companyRepository.delete(companyRepository.findById(id));
-		return "Company #" + id + " Was Removed";
 	}
 
-	@RequestMapping("/dcoupon/{id}")
-	@ResponseBody
-	public String removeCoupon(@PathVariable("id") long id) {
+	@DeleteMapping("/dcoupon/{id}")
+	public void removeCoupon(@PathVariable("id") long id) {
 		couponRepository.delete(couponRepository.findById(id));
-		return "Coupon #" + id + " Was Removed";
 	}
 
+	///////////
+	// PUT
+	///////////
+
+	@PutMapping(path = "/updateCustomer", consumes = { "application/json" })
+	public void uCustomer(@RequestBody Customer customer) {
+		customerRepository.save(customer);
+
+	}
+
+	@PutMapping(path = "/updateCompany", consumes = { "application/json" })
+	public void uCompany(@RequestBody Company company) {
+		companyRepository.save(company);
+
+	}
+
+	@PutMapping(path = "/updateCoupon", consumes = { "application/json" })
+	public void uCoupon(@RequestBody Coupon coupon) {
+		couponRepository.save(coupon);
+	}
 }
