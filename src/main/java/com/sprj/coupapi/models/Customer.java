@@ -14,8 +14,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Customer {
 
@@ -25,6 +25,7 @@ public class Customer {
 	long id;
 	@ManyToMany
 	List<Coupon> coupons;
+
 	String name, password;
 
 }
