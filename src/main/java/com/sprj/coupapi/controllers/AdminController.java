@@ -20,6 +20,7 @@ import com.sprj.coupapi.models.Coupon;
 import com.sprj.coupapi.models.Customer;
 
 @RestController
+@RequestMapping("admin")
 public class AdminController {
 
 	@Autowired
@@ -28,11 +29,6 @@ public class AdminController {
 	private CustomerRepository customerRepository;
 	@Autowired
 	private CouponRepository couponRepository;
-
-	@RequestMapping("/")
-	public String home() {
-		return "-------------Working! Test with postman for now!-------------";
-	}
 
 	////////////////
 	// GET by id
@@ -62,6 +58,7 @@ public class AdminController {
 
 	@GetMapping("/companies")
 	public Collection<Company> getCompanyList() {
+		System.out.println(companyRepository.findAll().toString());
 		return companyRepository.findAll();
 	}
 

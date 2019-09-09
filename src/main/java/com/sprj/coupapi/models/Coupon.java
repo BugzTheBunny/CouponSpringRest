@@ -6,6 +6,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.sprj.coupapi.enums.CouponStatus;
 import com.sprj.coupapi.enums.CouponType;

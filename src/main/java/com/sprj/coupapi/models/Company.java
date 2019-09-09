@@ -9,22 +9,31 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Company {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
-	long id;
+	private long id;
 	@ManyToMany
+	@JsonIgnore
 	private List<Coupon> coupons;
-	String name;
-	String email, password;
+	private String name;
+	private String email, password;
+
+	public Company() {
+
+	}
+
+	public Company(long id, String name, String email, String password) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+	}
 
 	public long getId() {
 		return id;

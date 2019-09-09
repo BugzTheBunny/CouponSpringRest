@@ -1,5 +1,6 @@
 package com.sprj.coupapi.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,21 +10,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
-	long id;
+	private long id;
+	@JsonIgnore
 	@ManyToMany
-	List<Coupon> coupons;
-	String name, password;
+	private List<Coupon> coupon = new ArrayList<>();
+	private String name, password;
+
+	public Customer() {
+
+	}
+
+	public Customer(long id, String name, String password) {
+		this.id = id;
+		this.name = name;
+		this.password = password;
+	}
 
 	public long getId() {
 		return id;
@@ -34,11 +43,11 @@ public class Customer {
 	}
 
 	public List<Coupon> getCoupons() {
-		return coupons;
+		return coupon;
 	}
 
 	public void setCoupons(List<Coupon> coupons) {
-		this.coupons = coupons;
+		this.coupon = coupons;
 	}
 
 	public String getName() {
