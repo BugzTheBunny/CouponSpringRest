@@ -1,6 +1,5 @@
 package com.sprj.coupapi.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,9 +19,10 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private long id;
-	@JsonIgnore
 	@ManyToMany
-	private List<Coupon> coupon = new ArrayList<>();
+	@JsonIgnore
+	private List<Coupon> coupons;
+	@NotNull
 	private String name, password;
 
 	public Customer() {
@@ -43,11 +44,11 @@ public class Customer {
 	}
 
 	public List<Coupon> getCoupons() {
-		return coupon;
+		return coupons;
 	}
 
 	public void setCoupons(List<Coupon> coupons) {
-		this.coupon = coupons;
+		this.coupons = coupons;
 	}
 
 	public String getName() {

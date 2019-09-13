@@ -15,8 +15,4 @@ insert into company values (4,'Macdonalds','Macdonalds','123')
 insert into company values (5,'Macdonalds','Macdonalds','123')
 insert into company values (6,'Macdonalds','Macdonalds','123')
 
-insert into coupon values (1,15,'message',25.5,'SALE','food','FOOD')
-
-
-insert into admin values (1,'admin','admin')
 

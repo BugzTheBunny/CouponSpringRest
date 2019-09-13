@@ -1,33 +1,42 @@
 package com.sprj.coupapi.models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.sprj.coupapi.enums.CouponStatus;
 import com.sprj.coupapi.enums.CouponType;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Coupon {
 
 	@Id
 	@GeneratedValue
 	@Column
+	@NotNull
 	private long id;
+	@NotNull
 	private String title;
+	@NotNull
 	private String message;
+	@NotNull
 	private double price;
+	@NotNull
 	private int amount;
-
+	@Temporal(TemporalType.DATE)
+	@Column(name = "start_date")
+	private Date start_date;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "end_Date")
+	private Date end_date;
 	@Enumerated(EnumType.STRING)
 	@Column(columnDefinition = "varchar(32) default 'OTHER'")
 	private CouponType type = CouponType.OTHER;
@@ -90,6 +99,33 @@ public class Coupon {
 	}
 
 	public void setStatus(CouponStatus status) {
+		this.status = status;
+	}
+
+	public Date getStart() {
+		return start_date;
+	}
+
+	public void setStart(Date start) {
+		this.start_date = start;
+	}
+
+	public Date getEnd() {
+		return end_date;
+	}
+
+	public void setEnd(Date end) {
+		this.end_date = end;
+	}
+
+	public Coupon(long id, String title, String message, double price, int amount, CouponType type,
+			CouponStatus status) {
+		this.id = id;
+		this.title = title;
+		this.message = message;
+		this.price = price;
+		this.amount = amount;
+		this.type = type;
 		this.status = status;
 	}
 

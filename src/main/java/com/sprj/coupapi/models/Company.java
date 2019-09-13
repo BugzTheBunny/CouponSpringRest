@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,7 +22,9 @@ public class Company {
 	@ManyToMany
 	@JsonIgnore
 	private List<Coupon> coupons;
+	@NotNull
 	private String name;
+	@NotNull
 	private String email, password;
 
 	public Company() {
